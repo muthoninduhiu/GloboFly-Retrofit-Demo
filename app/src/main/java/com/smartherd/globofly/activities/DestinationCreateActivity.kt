@@ -7,7 +7,6 @@ import com.smartherd.globofly.R
 import com.smartherd.globofly.models.Destination
 import com.smartherd.globofly.services.DestinationService
 import com.smartherd.globofly.services.ServiceBuilder
-import kotlinx.android.synthetic.main.activity_destiny_create.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
