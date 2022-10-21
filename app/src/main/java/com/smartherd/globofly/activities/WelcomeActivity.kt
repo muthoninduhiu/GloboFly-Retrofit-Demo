@@ -5,19 +5,20 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
-import com.smartherd.globofly.R
+import com.smartherd.globofly.databinding.ActivityWelcomeBinding
 import com.smartherd.globofly.services.MessageService
 import com.smartherd.globofly.services.ServiceBuilder
-import kotlinx.android.synthetic.main.activity_welcome.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class WelcomeActivity : AppCompatActivity() {
-
+  private lateinit var binding: ActivityWelcomeBinding
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		setContentView(R.layout.activity_welcome)
+        binding = ActivityWelcomeBinding.inflate(layoutInflater)
+        val view = binding.root
+		setContentView(view)
 
 		// To be replaced by retrofit code
 
@@ -30,7 +31,7 @@ class WelcomeActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val msg = response.body()
                     msg?.let {
-                        message.text = msg
+                        binding.message.text = msg
                     }
                 } else {
                     Toast.makeText(this@WelcomeActivity,
