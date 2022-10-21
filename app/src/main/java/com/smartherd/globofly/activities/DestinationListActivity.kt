@@ -69,7 +69,7 @@ class DestinationListActivity : AppCompatActivity() {
             // or Error Creating Http Request or Error Processing Http Response
             override fun onFailure(call: Call<List<Destination>>, t: Throwable) {
 
-                Toast.makeText(this@DestinationListActivity, "Error Occurred" + t.toString(), Toast.LENGTH_LONG).show()
+                Toast.makeText(this@DestinationListActivity, "Error Occurred " + t.toString(), Toast.LENGTH_LONG).show()
             }
         })
     }
