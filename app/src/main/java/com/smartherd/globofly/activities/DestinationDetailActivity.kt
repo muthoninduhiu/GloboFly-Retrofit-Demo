@@ -6,22 +6,25 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.Toast
 import com.smartherd.globofly.R
+import com.smartherd.globofly.databinding.ActivityDestinyCreateBinding
+import com.smartherd.globofly.databinding.ActivityDestinyDetailBinding
 import com.smartherd.globofly.models.Destination
 import com.smartherd.globofly.services.DestinationService
 import com.smartherd.globofly.services.ServiceBuilder
-import kotlinx.android.synthetic.main.activity_destiny_detail.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
 class DestinationDetailActivity : AppCompatActivity() {
-
+    private lateinit var binding: ActivityDestinyDetailBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_destiny_detail)
+        binding = ActivityDestinyDetailBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
-        setSupportActionBar(detail_toolbar)
+        setSupportActionBar(binding.detailToolbar)
         // Show the Up button in the action bar.
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -51,11 +54,11 @@ class DestinationDetailActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val destination = response.body()
                     destination?.let {
-                        et_city.setText(destination.city)
-                        et_description.setText(destination.description)
-                        et_country.setText(destination.country)
+                        binding.etCity.setText(destination.city)
+                        binding.etDescription.setText(destination.description)
+                        binding.etCountry.setText(destination.country)
 
-                        collapsing_toolbar.title = destination.city
+                        binding.collapsingToolbar.title = destination.city
                     }
                 } else {
                     Toast.makeText(this@DestinationDetailActivity, "Failed to retrieve details", Toast.LENGTH_SHORT)
@@ -75,11 +78,11 @@ class DestinationDetailActivity : AppCompatActivity() {
 
     private fun initUpdateButton(id: Int) {
 
-        btn_update.setOnClickListener {
+        binding.btnUpdate.setOnClickListener {
 
-            val city = et_city.text.toString()
-            val description = et_description.text.toString()
-            val country = et_country.text.toString()
+            val city = binding.etCity.text.toString()
+            val description = binding.etDescription.text.toString()
+            val country = binding.etCountry.text.toString()
 
             val destinationService = ServiceBuilder.buildService(DestinationService::class.java)
             val requestCall = destinationService.updateDestination(id, city, description, country)
@@ -108,7 +111,7 @@ class DestinationDetailActivity : AppCompatActivity() {
 
     private fun initDeleteButton(id: Int) {
 
-        btn_delete.setOnClickListener {
+        binding.btnDelete.setOnClickListener {
 
             val destinationService = ServiceBuilder.buildService(DestinationService::class.java)
             val requestCall = destinationService.deleteDestination(id)
