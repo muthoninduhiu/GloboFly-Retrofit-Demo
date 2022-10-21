@@ -11,11 +11,13 @@ import com.smartherd.globofly.activities.DestinationDetailActivity
 import com.smartherd.globofly.models.Destination
 import com.smartherd.globofly.R
 
-class DestinationAdapter(private val destinationList: List<Destination>) : RecyclerView.Adapter<DestinationAdapter.ViewHolder>() {
+class DestinationAdapter(private val destinationList: List<Destination>) :
+	RecyclerView.Adapter<DestinationAdapter.ViewHolder>() {
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-		val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
+		val view = LayoutInflater.from(parent.context).inflate(
+			R.layout.list_item, parent, false)
 		return ViewHolder(view)
 	}
 
@@ -33,9 +35,8 @@ class DestinationAdapter(private val destinationList: List<Destination>) : Recyc
 		}
 	}
 
-	override fun getItemCount(): Int {
-		return destinationList.size
-	}
+	override fun getItemCount(): Int = destinationList.size
+
 
 	class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
